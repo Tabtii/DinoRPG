@@ -1,22 +1,120 @@
 package Klassen
+
+import kotlin.system.exitProcess
+
 var dinoListe = mutableListOf<Charakter>()
 var heroListe = mutableListOf<Charakter>()
 var reihenfolgeListe = mutableListOf<Charakter>()
 var gameLvl = 1
+var runden = 0
+
 class Game {
+    fun gegnerPlus() {
+        when (gameLvl) {
+            1 -> {
+                repeat(2) { charakterePLUS(Dino().randomDino()) }
+            }
+
+            2 -> {
+                repeat(3) { charakterePLUS(Dino().randomDino()) }
+            }
+
+            3 -> {
+                repeat(4) { charakterePLUS(Dino().randomDino()) }
+            }
+
+            4 -> {
+                println("GEWONNEN GUT GEMACHT!")
+                exitProcess(69)
+            }
+        }
+    }
+
+    fun spielStarten() {
+        println("Wie viele Helfer sollen dich unterstützen")
+        println("--1-- oder --2-- oder --3--")
+        var eingabe = readln()
+        when (eingabe) {
+            "1" -> {
+                charakterePLUS(Held().heldErstellen())
+                charakterePLUS(Held().heldenWahl())
+                gameLvl = 1
+            }
+
+            "2" -> {
+                charakterePLUS(Held().heldErstellen())
+                charakterePLUS(Held().heldenWahl())
+                charakterePLUS(Held().heldenWahl())
+                gameLvl = 2
+            }
+
+            "3" -> {
+                charakterePLUS(Held().heldErstellen())
+                charakterePLUS(Held().heldenWahl())
+                charakterePLUS(Held().heldenWahl())
+                gameLvl = 3
+            }
+        }
+        gegnerPlus()
+    }
 
     fun charakterePLUS(charakter: Charakter) {
-        when {
-
-            charakter is YourHero -> heroListe.add(charakter)
+        when (charakter) {
+            is Held -> heroListe.add(charakter)
             else -> dinoListe.add(charakter)
+        }
+    }
+
+    fun kampfUnfaehig() {
+
+        var i = 0
+        siegOderLose()
+        while (i <= reihenfolgeListe.lastIndex) {
+            if (reihenfolgeListe[i].lp <= 0) {
+                println("${reihenfolgeListe[i].name} ist kampfunfähig.")
+                reihenfolgeListe.removeAt(i)
+                Thread.sleep(1000)
+                i++
+            } else break
+        }
+
+
+    }
+
+    fun siegOderLose(): Boolean {
+        when {
+            reihenfolgeListe.filterIsInstance<Dino>().isEmpty() -> {
+                println("Gewonnen")
+                return false
+            }
+
+            reihenfolgeListe.filterIsInstance<Held>().isEmpty() -> {
+                println("Verloren")
+                return false
+            }
+        }
+        return true
+    }
+
+    fun runde(): Int {
+        runden += 1
+        return runden
+    }
+
+    fun zurueckSetzen(boolean: Boolean) {
+        when (boolean) {
+            false -> for (x in reihenfolgeListe) {
+                x.resetWerte()
+            }
+
+            true -> println()
         }
     }
 
     fun gegnerWahl(): Charakter {
         var i = 1
         println("Gegner auswählen:")
-        for (gegner in dinoListe) {
+        for (gegner in reihenfolgeListe.filterIsInstance<Dino>()) {
             println("--${i}--${gegner.name}")
             i++
         }
@@ -30,6 +128,7 @@ class Game {
             eingabe == "2" -> {
                 help = eingabe.toInt() - 1
             }
+
             eingabe == "3" -> {
                 help = eingabe.toInt() - 1
             }
@@ -39,7 +138,30 @@ class Game {
 
             }
         }
-        return dinoListe[help]
+        return reihenfolgeListe.filterIsInstance<Dino>()[help]
+    }
+
+    fun kampf() {
+        reihenfolge()
+
+        while (siegOderLose()) {
+
+            for (char in reihenfolgeListe) {
+                char.showLebenPunkte()
+                println()
+                Thread.sleep(1000)
+
+            }
+            var i= 0
+            while (i <= reihenfolgeListe.lastIndex) {
+                kampfUnfaehig()
+                reihenfolgeListe[i].aktion()
+                kampfUnfaehig()
+                i++
+            }
+            reihenfolge()
+            runde()
+        }
     }
 
     fun reihenfolge() {
@@ -85,5 +207,6 @@ class Game {
             }
 
         } while (true)
+
     }
 }

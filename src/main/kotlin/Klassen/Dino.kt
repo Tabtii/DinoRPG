@@ -1,53 +1,180 @@
 package Klassen
 
-class Dino(): Charakter() {
-    override var maxLP = 0
-    constructor(name:String,lp: Int,atk:Int,ver: Int, geschF :Int, geschN : Int): this()
-    var compy = Dino("Compy",100,20,20,1,20)
-    var raptor = Dino("Raptor",100,20,20,1,20)
-    var rex = Dino("Rex",100,20,20,1,20)
+class Dino() : Charakter() {
 
-    fun randomDino():Charakter{
+
+    fun randomDino(): Dino {
         var i = (0..100).random()
-        var char = Charakter()
-        when(gameLvl){
+        var char = Dino()
+        when (gameLvl) {
             1 -> when (i) {
                 in 0..70 -> {
-                    char = compy
+                    char.name = "Compy"
+                    char.lp = 100
+                    char.atk = 80
+                    char.ver = 50
+                    char.geschF = 100
+                    char.geschN = 20
+                    char.maxLP = char.lp
+                    char.maxAtk = char.atk
+                    char.maxVer = char.ver
+                    char.maxGeschF = char.geschF
+                    char.maxGeschN = char.geschN
                 }
+
                 in 71..90 -> {
-                    char = raptor
+                    char.name = "Raptor"
+                    char.lp = 100
+                    char.atk = 80
+                    char.ver = 50
+                    char.geschF = 100
+                    char.geschN = 20
+                    char.maxLP = char.lp
+                    char.maxAtk = char.atk
+                    char.maxVer = char.ver
+                    char.maxGeschF = char.geschF
+                    char.maxGeschN = char.geschN
                 }
+
                 in 91..100 -> {
-                    char = rex
+                    char.name = "Rex"
+                    char.lp = 100
+                    char.atk = 80
+                    char.ver = 50
+                    char.geschF = 100
+                    char.geschN = 20
+                    char.maxLP = char.lp
+                    char.maxAtk = char.atk
+                    char.maxVer = char.ver
+                    char.maxGeschF = char.geschF
+                    char.maxGeschN = char.geschN
                 }
 
             }
+
             2 -> when (i) {
                 in 0..50 -> {
-                    char = compy
+                    char.name = "Compy"
+                    char.lp = 100
+                    char.atk = 80
+                    char.ver = 50
+                    char.geschF = 100
+                    char.geschN = 20
+                    char.maxLP = char.lp
+                    char.maxAtk = char.atk
+                    char.maxVer = char.ver
+                    char.maxGeschF = char.geschF
+                    char.maxGeschN = char.geschN
                 }
+
                 in 51..75 -> {
-                    char = raptor
+                    char.name = "Raptor"
+                    char.lp = 100
+                    char.atk = 80
+                    char.ver = 50
+                    char.geschF = 100
+                    char.geschN = 20
+                    char.maxLP = char.lp
+                    char.maxAtk = char.atk
+                    char.maxVer = char.ver
+                    char.maxGeschF = char.geschF
+                    char.maxGeschN = char.geschN
                 }
+
                 in 76..100 -> {
-                    char = rex
+                    char.name = "Rex"
+                    char.lp = 100
+                    char.atk = 80
+                    char.ver = 50
+                    char.geschF = 100
+                    char.geschN = 20
+                    char.maxLP = char.lp
+                    char.maxAtk = char.atk
+                    char.maxVer = char.ver
+                    char.maxGeschF = char.geschF
+                    char.maxGeschN = char.geschN
                 }
 
             }
+
             3 -> when (i) {
                 in 0..10 -> {
-                    char = compy
+                    char.name = "Compy"
+                    char.lp = 100
+                    char.atk = 80
+                    char.ver = 50
+                    char.geschF = 100
+                    char.geschN = 20
+                    char.maxLP = char.lp
+                    char.maxAtk = char.atk
+                    char.maxVer = char.ver
+                    char.maxGeschF = char.geschF
+                    char.maxGeschN = char.geschN
                 }
+
                 in 11..50 -> {
-                    char = raptor
+                    char.name = "Raptor"
+                    char.lp = 100
+                    char.atk = 80
+                    char.ver = 50
+                    char.geschF = 100
+                    char.geschN = 20
+                    char.maxLP = char.lp
+                    char.maxAtk = char.atk
+                    char.maxVer = char.ver
+                    char.maxGeschF = char.geschF
+                    char.maxGeschN = char.geschN
                 }
+
                 in 50..100 -> {
-                    char = rex
+                    char.name = "Rex"
+                    char.lp = 100
+                    char.atk = 80
+                    char.ver = 50
+                    char.geschF = 100
+                    char.geschN = 20
+                    char.maxLP = char.lp
+                    char.maxAtk = char.atk
+                    char.maxVer = char.ver
+                    char.maxGeschF = char.geschF
+                    char.maxGeschN = char.geschN
                 }
 
             }
         }
         return char
     }
+
+
+    override fun aktion() {
+        var i = (0..100).random()
+
+        var schaden = 0
+        when (i) {
+            in (0..50) -> {
+                schaden = attack()
+                var ziel = reihenfolgeListe.filterIsInstance<Held>().random()
+                ziel.takeDamage(schaden)
+                println()
+            }
+
+            in (51..85) -> {
+                schaden = spezialAngriff()
+                var ziel = reihenfolgeListe.filterIsInstance<Held>().random()
+                ziel.takeDamage(schaden)
+                println()
+            }
+
+            in (86..100) -> {
+                when (this.name) {
+                    "Compy" -> Faehigkeiten().dinoHeilen()
+                    "Raptor" -> Faehigkeiten().dinoAngrPlus()
+                    "Rex" -> Faehigkeiten().dinoRufen()
+                }
+                println()
+            }
+        }
+        Thread.sleep(1000)
+    }
+
 }
