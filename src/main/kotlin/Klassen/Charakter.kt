@@ -5,6 +5,8 @@ open class Charakter() {
     open var lp = 1
     open var atk = 1
     open var ver = 1
+    open var geschF = 1
+    open var geschN = 1
     open var maxLP = lp
 
     fun attack(): Int {
@@ -31,11 +33,8 @@ open class Charakter() {
         return 0
     }
 
-    open fun faehigkeit(): Int {
-        return 0
-    }
 
-    fun showLebenPunkte() {
+    open fun showLebenPunkte() {
         println("${this.name} hat noch (${this.lp}/${this.maxLP}) LP.")
     }
 
@@ -47,18 +46,26 @@ open class Charakter() {
         println("--3--Fähigkeit einsetzen")
         println("--4--Rucksack")
         var eingabe = readln()
+        var spielfeld= Game()
+        var ziel: Charakter
+        var schaden = 0
         when {
             eingabe == "1" -> {
-               attack()
+                ziel = spielfeld.gegnerWahl()
+                schaden = attack()
+                ziel.takeDamage(schaden)
             }
 
             eingabe == "2" -> {
-                spezialAngriff()
+                ziel = spielfeld.gegnerWahl()
+               schaden =  spezialAngriff()
+                ziel.takeDamage(schaden)
             }
 
             eingabe == "3" -> {
-               faehigkeit()
+
             }
+
             eingabe == "4" -> {
                 println("Gibbebt noch net")
             }

@@ -1,17 +1,13 @@
 package Klassen
-
-class Spielfeld {
-    var dinoListe = mutableListOf<Charakter>()
-    var heroListe = mutableListOf<Charakter>()
-    var reihenfolgeListe = mutableListOf<Charakter>()
+var dinoListe = mutableListOf<Charakter>()
+var heroListe = mutableListOf<Charakter>()
+var reihenfolgeListe = mutableListOf<Charakter>()
+var gameLvl = 1
+class Game {
 
     fun charakterePLUS(charakter: Charakter) {
         when {
-            charakter is Owen -> heroListe.add(charakter)
-            charakter is Alan -> heroListe.add(charakter)
-            charakter is Claire -> heroListe.add(charakter)
-            charakter is Ellie -> heroListe.add(charakter)
-            charakter is Ian -> heroListe.add(charakter)
+
             charakter is YourHero -> heroListe.add(charakter)
             else -> dinoListe.add(charakter)
         }
@@ -91,4 +87,3 @@ class Spielfeld {
         } while (true)
     }
 }
-
