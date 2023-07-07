@@ -66,8 +66,8 @@ class Faehigkeiten {
                     held.geschF += 10
                     held.geschN += 10
                     println(
-                        "${held.name}s Verteidigung wurde erhöht.\nGeschickN:${held.geschN}/${held.maxGeschN}\n" +
-                                "GeschickF:${held.geschF}/${held.maxGeschF}."
+                        "${held.name}s Geschick wurde erhöht.\nGeschickN:${held.geschN}/${held.maxGeschN}\n" +
+                                "GeschickF:${held.geschF}/${held.maxGeschF}.\n"
                     )
                     Thread.sleep(500)
                 }

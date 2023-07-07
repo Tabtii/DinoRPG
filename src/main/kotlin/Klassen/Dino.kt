@@ -10,11 +10,11 @@ class Dino() : Charakter() {
             1 -> when (i) {
                 in 0..70 -> {
                     char.name = "Compy"
-                    char.lp = 100
-                    char.atk = 80
-                    char.ver = 50
-                    char.geschF = 100
-                    char.geschN = 20
+                    char.lp = (75..150).random()
+                    char.atk = (50..90).random()
+                    char.ver = (20..750).random()
+                    char.geschF = (1..50).random()
+                    char.geschN = (50..80).random()
                     char.maxLP = char.lp
                     char.maxAtk = char.atk
                     char.maxVer = char.ver
@@ -24,11 +24,11 @@ class Dino() : Charakter() {
 
                 in 71..90 -> {
                     char.name = "Raptor"
-                    char.lp = 100
-                    char.atk = 80
-                    char.ver = 50
-                    char.geschF = 100
-                    char.geschN = 20
+                    char.lp = (120..200).random()
+                    char.atk = (75..150).random()
+                    char.ver = (55..95).random()
+                    char.geschF = (1..55).random()
+                    char.geschN = (60..85).random()
                     char.maxLP = char.lp
                     char.maxAtk = char.atk
                     char.maxVer = char.ver
@@ -38,11 +38,11 @@ class Dino() : Charakter() {
 
                 in 91..100 -> {
                     char.name = "Rex"
-                    char.lp = 100
-                    char.atk = 80
-                    char.ver = 50
-                    char.geschF = 100
-                    char.geschN = 20
+                    char.lp = (190..285).random()
+                    char.atk = (120..200).random()
+                    char.ver = (100..120).random()
+                    char.geschF = (1..55).random()
+                    char.geschN = (60..85).random()
                     char.maxLP = char.lp
                     char.maxAtk = char.atk
                     char.maxVer = char.ver
@@ -53,13 +53,13 @@ class Dino() : Charakter() {
             }
 
             2 -> when (i) {
-                in 0..50 -> {
+                in 0..60 -> {
                     char.name = "Compy"
-                    char.lp = 100
-                    char.atk = 80
-                    char.ver = 50
-                    char.geschF = 100
-                    char.geschN = 20
+                    char.lp = (75..150).random()
+                    char.atk = (50..90).random()
+                    char.ver = (20..750).random()
+                    char.geschF = (1..50).random()
+                    char.geschN = (50..80).random()
                     char.maxLP = char.lp
                     char.maxAtk = char.atk
                     char.maxVer = char.ver
@@ -67,13 +67,13 @@ class Dino() : Charakter() {
                     char.maxGeschN = char.geschN
                 }
 
-                in 51..75 -> {
+                in 61..85 -> {
                     char.name = "Raptor"
-                    char.lp = 100
-                    char.atk = 80
-                    char.ver = 50
-                    char.geschF = 100
-                    char.geschN = 20
+                    char.lp = (120..200).random()
+                    char.atk = (75..150).random()
+                    char.ver = (55..95).random()
+                    char.geschF = (1..55).random()
+                    char.geschN = (60..85).random()
                     char.maxLP = char.lp
                     char.maxAtk = char.atk
                     char.maxVer = char.ver
@@ -81,13 +81,13 @@ class Dino() : Charakter() {
                     char.maxGeschN = char.geschN
                 }
 
-                in 76..100 -> {
+                in 86..100 -> {
                     char.name = "Rex"
-                    char.lp = 100
-                    char.atk = 80
-                    char.ver = 50
-                    char.geschF = 100
-                    char.geschN = 20
+                    char.lp = (190..285).random()
+                    char.atk = (120..200).random()
+                    char.ver = (100..120).random()
+                    char.geschF = (1..55).random()
+                    char.geschN = (60..85).random()
                     char.maxLP = char.lp
                     char.maxAtk = char.atk
                     char.maxVer = char.ver
@@ -98,13 +98,13 @@ class Dino() : Charakter() {
             }
 
             3 -> when (i) {
-                in 0..10 -> {
+                in 0..40 -> {
                     char.name = "Compy"
-                    char.lp = 100
-                    char.atk = 80
-                    char.ver = 50
-                    char.geschF = 100
-                    char.geschN = 20
+                    char.lp = (75..150).random()
+                    char.atk = (50..90).random()
+                    char.ver = (20..750).random()
+                    char.geschF = (1..50).random()
+                    char.geschN = (50..80).random()
                     char.maxLP = char.lp
                     char.maxAtk = char.atk
                     char.maxVer = char.ver
@@ -112,13 +112,13 @@ class Dino() : Charakter() {
                     char.maxGeschN = char.geschN
                 }
 
-                in 11..50 -> {
+                in 41..75 -> {
                     char.name = "Raptor"
-                    char.lp = 100
-                    char.atk = 80
-                    char.ver = 50
-                    char.geschF = 100
-                    char.geschN = 20
+                    char.lp = (120..200).random()
+                    char.atk = (75..150).random()
+                    char.ver = (55..95).random()
+                    char.geschF = (1..55).random()
+                    char.geschN = (60..85).random()
                     char.maxLP = char.lp
                     char.maxAtk = char.atk
                     char.maxVer = char.ver
@@ -126,13 +126,13 @@ class Dino() : Charakter() {
                     char.maxGeschN = char.geschN
                 }
 
-                in 50..100 -> {
+                in 76..100 -> {
                     char.name = "Rex"
-                    char.lp = 100
-                    char.atk = 80
-                    char.ver = 50
-                    char.geschF = 100
-                    char.geschN = 20
+                    char.lp = (190..285).random()
+                    char.atk = (120..200).random()
+                    char.ver = (100..120).random()
+                    char.geschF = (1..55).random()
+                    char.geschN = (60..85).random()
                     char.maxLP = char.lp
                     char.maxAtk = char.atk
                     char.maxVer = char.ver
@@ -147,34 +147,38 @@ class Dino() : Charakter() {
 
 
     override fun aktion() {
-        var i = (0..100).random()
 
-        var schaden = 0
-        when (i) {
-            in (0..50) -> {
-                schaden = attack()
-                var ziel = reihenfolgeListe.filterIsInstance<Held>().random()
-                ziel.takeDamage(schaden)
-                println()
-            }
-
-            in (51..85) -> {
-                schaden = spezialAngriff()
-                var ziel = reihenfolgeListe.filterIsInstance<Held>().random()
-                ziel.takeDamage(schaden)
-                println()
-            }
-
-            in (86..100) -> {
-                when (this.name) {
-                    "Compy" -> Faehigkeiten().dinoHeilen()
-                    "Raptor" -> Faehigkeiten().dinoAngrPlus()
-                    "Rex" -> Faehigkeiten().dinoRufen()
+        if (!kampfUnfaehig()) {
+            var i = (0..100).random()
+            var schaden = 0
+            when (i) {
+                in (0..50) -> {
+                    schaden = attack()
+                    var ziel = reihenfolgeListe.filterIsInstance<Held>().random()
+                    ziel.takeDamage(schaden)
+                    println()
                 }
-                println()
-            }
-        }
-        Thread.sleep(1000)
-    }
 
+                in (51..85) -> {
+                    schaden = spezialAngriff()
+                    var ziel = reihenfolgeListe.filterIsInstance<Held>().random()
+                    ziel.takeDamage(schaden)
+                    println()
+                }
+
+                in (86..100) -> {
+                    when (this.name) {
+                        "Compy" -> Faehigkeiten().dinoHeilen()
+                        "Raptor" -> Faehigkeiten().dinoAngrPlus()
+                        "Rex" -> Faehigkeiten().dinoRufen()
+                    }
+                    println()
+                }
+            }
+            Thread.sleep(1000)
+        } else {
+            reihenfolgeListe.remove(this)
+        }
+    }
 }
+

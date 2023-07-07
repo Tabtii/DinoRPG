@@ -7,6 +7,7 @@ var heroListe = mutableListOf<Charakter>()
 var reihenfolgeListe = mutableListOf<Charakter>()
 var gameLvl = 1
 var runden = 0
+var rucksack = mutableListOf<Item>()
 
 class Game {
     fun gegnerPlus() {
@@ -37,12 +38,14 @@ class Game {
         when (eingabe) {
             "1" -> {
                 charakterePLUS(Held().heldErstellen())
+                heroListe.first().showStats()
                 charakterePLUS(Held().heldenWahl())
                 gameLvl = 1
             }
 
             "2" -> {
                 charakterePLUS(Held().heldErstellen())
+                heroListe.first().showStats()
                 charakterePLUS(Held().heldenWahl())
                 charakterePLUS(Held().heldenWahl())
                 gameLvl = 2
@@ -50,6 +53,8 @@ class Game {
 
             "3" -> {
                 charakterePLUS(Held().heldErstellen())
+                heroListe.first().showStats()
+                charakterePLUS(Held().heldenWahl())
                 charakterePLUS(Held().heldenWahl())
                 charakterePLUS(Held().heldenWahl())
                 gameLvl = 3
@@ -65,31 +70,14 @@ class Game {
         }
     }
 
-    fun kampfUnfaehig() {
-
-        var i = 0
-        siegOderLose()
-        while (i <= reihenfolgeListe.lastIndex) {
-            if (reihenfolgeListe[i].lp <= 0) {
-                println("${reihenfolgeListe[i].name} ist kampfunfähig.")
-                reihenfolgeListe.removeAt(i)
-                Thread.sleep(1000)
-                i++
-            } else break
-        }
-
-
-    }
 
     fun siegOderLose(): Boolean {
         when {
             reihenfolgeListe.filterIsInstance<Dino>().isEmpty() -> {
-                println("Gewonnen")
                 return false
             }
 
             reihenfolgeListe.filterIsInstance<Held>().isEmpty() -> {
-                println("Verloren")
                 return false
             }
         }
@@ -115,7 +103,7 @@ class Game {
         var i = 1
         println("Gegner auswählen:")
         for (gegner in reihenfolgeListe.filterIsInstance<Dino>()) {
-            println("--${i}--${gegner.name}")
+            println("--${i}--${gegner.name} LP: ${gegner.lp}/${gegner.maxLP}")
             i++
         }
         var help = 0
@@ -132,7 +120,9 @@ class Game {
             eingabe == "3" -> {
                 help = eingabe.toInt() - 1
             }
-
+            eingabe == "4" -> {
+                help = eingabe.toInt() - 1
+            }
             else -> {
                 println("Falsche Eingabe!")
 
@@ -145,22 +135,25 @@ class Game {
         reihenfolge()
 
         while (siegOderLose()) {
-
             for (char in reihenfolgeListe) {
                 char.showLebenPunkte()
-                println()
                 Thread.sleep(1000)
-
             }
-            var i= 0
+            var i = 0
             while (i <= reihenfolgeListe.lastIndex) {
-                kampfUnfaehig()
+                Charakter().kampfUnfaehig()
+                siegOderLose()
+                if (reihenfolgeListe[i] is Held) {
+                    reihenfolgeListe[i].showStats()
+                }
                 reihenfolgeListe[i].aktion()
-                kampfUnfaehig()
+                Charakter().kampfUnfaehig()
+                siegOderLose()
                 i++
             }
             reihenfolge()
             runde()
+            println(runden)
         }
     }
 

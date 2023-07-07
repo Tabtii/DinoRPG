@@ -73,72 +73,21 @@ open class Held() : Charakter() {
         return char
     }
 
-    fun heldErstellen(): Charakter {
+    fun heldErstellen(): Held {
         println("Wie willst du genannt werden?")
-        this.name = readlnOrNull() ?: ""
-
-        println("Was ist deine Stärke?")
-        println("--1-- Angreifen")
-        println("--2-- Verteidigen")
-        println("--3-- Unterstützen")
-        println("Wähle mit Sorgfalt, es bestimmt deine Werte.")
-
-        var eingabe: Int
-        do {
-            eingabe = readlnOrNull()?.toIntOrNull() ?: 0
-
-            when (eingabe) {
-                1 -> {
-                    this.lp = (70..101).random()
-                    this.atk = (100..110).random()
-                    this.ver = (20..51).random()
-                    this.geschF = (100..110).random()
-                    this.geschN = (100..110).random()
-                    this.maxLP = lp
-                    this.maxAtk = atk
-                    this.maxVer = ver
-                    this.maxGeschF = geschF
-                    this.maxGeschN = geschN
-                }
-
-                2 -> {
-                    this.lp = (170..200).random()
-                    this.atk = (25..75).random()
-                    this.ver = (75..110).random()
-                    this.geschF = (10..50).random()
-                    this.geschN = (10..50).random()
-                    this.maxLP = lp
-                    this.maxLP = lp
-                    this.maxAtk = atk
-                    this.maxVer = ver
-                    this.maxGeschF = geschF
-                    this.maxGeschN = geschN
-                }
-
-                3 -> {
-                    this.lp = (100..120).random()
-                    this.atk = (60..80).random()
-                    this.ver = (60..80).random()
-                    this.geschF = (60..80).random()
-                    this.geschN = (60..80).random()
-                    this.maxLP = lp
-                    this.maxLP = lp
-                    this.maxAtk = atk
-                    this.maxVer = ver
-                    this.maxGeschF = geschF
-                    this.maxGeschN = geschN
-                }
-
-                else -> {
-                    println("Falsche Eingabe. Bitte versuche es erneut.")
-                    println()
-                }
-            }
-            println()
-            Thread.sleep(1000)
-        } while (eingabe !in 1..3)
-
-        return this
+        var char = Held()
+        char.name = readln()
+        char.lp = (100..150).random()
+        char.atk = (70..150).random()
+        char.ver =(70..150).random()
+        char.geschF = (70..150).random()
+        char.geschN = (70..150).random()
+        char.maxLP = char.lp
+        char.maxAtk = char.atk
+        char.maxVer = char.ver
+        char.maxGeschF = char.geschF
+        char.maxGeschN = char.geschN
+        return char
     }
 
 }
