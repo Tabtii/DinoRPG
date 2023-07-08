@@ -15,6 +15,7 @@ open class Charakter() {
     open var maxGeschF = geschF
     open var maxGeschN = geschN
 
+
     fun attack(): Int {
         println("${this.name} greift an!\n")
         return 25 + ((atk + geschN) / 2).toInt()
@@ -47,7 +48,8 @@ open class Charakter() {
                     var ziel = x
                     println("${this.name} greift an!")
                     ziel.takeDamage(schaden)
-
+                    ziel.showLebenPunkte()
+                    Thread.sleep(500)
                 }
             }
 
@@ -57,7 +59,18 @@ open class Charakter() {
 
     fun healAngriff(): Int {
         println("${this.name} greift an!")
-        this.lp += 10
+        if (this.lp == this.maxLP) {
+            println("${this.name} muss nicht geheilt werden.\n")
+            Thread.sleep(500)
+        } else {
+            this.lp += 15
+            println("${this.name} wurde geheilt.\n")
+            Thread.sleep(500)
+            if (this.lp > this.maxLP) {
+                this.lp = this.maxLP
+            }
+        }
+
         return 25 + ((atk + geschN) / 2.5).toInt()
     }
 
@@ -70,18 +83,104 @@ open class Charakter() {
     }
 
     fun kampfUnfaehig(): Boolean {
+        if (this.lp <= 0){
+            reihenfolgeListe.remove(this)
+        }
         return this.lp <= 0
     }
 
     fun inventar() {
+        var i = 0
 
+        if (rucksack.isNotEmpty()) {
+            for (item in rucksack) {
+                println("$i: ${item.name} // ${item.beschreibung}")
+            }
+
+            println("Was willst du benutzen?")
+            var eingaben = readln()
+            if (eingaben.toInt() in 0..rucksack.lastIndex) {
+                when (rucksack[i].name) {
+                    "Medkit" -> {
+                        println("Wer soll geheilt werden?")
+                        var ziel = Game().heroWahl()
+                        if (ziel.lp == ziel.maxLP) {
+                            println("${ziel.name} muss nicht geheilt werden.\n")
+                            Thread.sleep(500)
+                        } else {
+                            ziel.lp += rucksack[i].effekt
+                            println("${ziel.name} wurde geheilt.\n")
+                            Thread.sleep(500)
+                            if (ziel.lp > ziel.maxLP) {
+                                ziel.lp = ziel.maxLP
+
+                            }
+                        }
+                        Thread.sleep(500)
+                        rucksack.removeAt(i)
+                    }
+
+                    "Stein" -> {
+                        println("Wen willst du abwerfen?")
+                        var schaden = rucksack[i].effekt
+                        var ziel = Game().gegnerWahl()
+                        ziel.lp -= schaden
+                        ziel.showLebenPunkte()
+                        Thread.sleep(500)
+                        ziel.atk -= 10
+                        println("${ziel.name}s Angriff wurde verringert. Atk:${ziel.atk}/${ziel.maxAtk}.")
+                        rucksack.removeAt(i)
+                        Thread.sleep(500)
+
+                    }
+
+                    "Stück Fleisch" -> {
+                        println("Wen willst du abwerfen?")
+                        var schaden = rucksack[i].effekt
+                        var ziel = Game().gegnerWahl()
+                        ziel.lp += schaden
+                        ziel.showLebenPunkte()
+                        Thread.sleep(500)
+                        ziel.ver -= schaden
+                        println("${ziel.name}s Verteidigung wurde verringert. Atk:${ziel.ver}/${ziel.maxVer}.\n")
+                        rucksack.removeAt(i)
+                        Thread.sleep(500)
+
+                    }
+
+                    "Granate" -> {
+                        println("ACHTUNG GRANATE!")
+                        for (x in reihenfolgeListe) {
+                            when (x) {
+                                is Dino -> {
+                                    var schaden = rucksack[i].effekt
+                                    var ziel = x
+                                    ziel.takeDamage(schaden)
+                                    ziel.showLebenPunkte()
+                                    Thread.sleep(500)
+                                }
+                            }
+                        }
+                        rucksack.removeAt(i)
+                        Thread.sleep(500)
+
+                    }
+
+                }
+            }
+        } else {
+            println("Kein Item vorhanden.")
+        }
     }
 
     open fun showLebenPunkte() {
-        println("${this.name} hat noch (${this.lp}/${this.maxLP}) LP.\n")
+        if (this.lp <= 0){
+            println("${this.name} hat noch (0/${this.maxLP}) LP.\n")
+        }else {println("${this.name} hat noch (${this.lp}/${this.maxLP}) LP.\n")}
+
     }
 
-    fun showStats(){
+    fun showStats() {
         println("Name:${this.name}")
         println("Lebenspunkte:${this.lp}/${this.maxLP}")
         println("Angriff:${this.atk}/${this.maxAtk}")
@@ -127,20 +226,28 @@ open class Charakter() {
                         this.name == "Mercenary" -> Faehigkeiten().vertPlus()
                         this.name == "Ranger" -> Faehigkeiten().geschickPlus()
                         else -> {
-                            var i = (0..10).random()
-                            when (i) {
+                            when (hilfsWertSpezialAng) {
                                 in (0..3) -> multiAngriff()
-                                in (4..10) -> healAngriff()
+                                in (4..10) -> {
+                                    ziel = spielfeld.gegnerWahl()
+                                    schaden = healAngriff()
+                                    ziel.takeDamage(schaden)
+                                    ziel.showLebenPunkte()
+                                    Thread.sleep(1000)
+                                }
                             }
                         }
                     }
                 }
+
                 eingabe == "4" -> {
-                    println("Gibbebt noch net")
+                    inventar()
                 }
+
                 eingabe == "5" -> {
                     exitProcess(0)
                 }
+
                 else -> {
                     println("Falsche Eingabe!")
                     aktion()
@@ -149,6 +256,16 @@ open class Charakter() {
             Thread.sleep(1000)
         } else {
             reihenfolgeListe.remove(this)
+            when{
+                reihenfolgeListe.filterIsInstance<Dino>().isEmpty() -> {
+                    gameLvl += 1
+                    println("Gewonnen!")
+                }
+                reihenfolgeListe.filterIsInstance<Held>().isEmpty() -> {
+                    println("Verloren!")
+                    exitProcess(2)
+                }
+            }
         }
     }
 }

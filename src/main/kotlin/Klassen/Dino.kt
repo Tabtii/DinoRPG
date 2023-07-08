@@ -11,8 +11,8 @@ class Dino() : Charakter() {
                 in 0..70 -> {
                     char.name = "Compy"
                     char.lp = (75..150).random()
-                    char.atk = (50..90).random()
-                    char.ver = (20..750).random()
+                    char.atk = (70..90).random()
+                    char.ver = (20..75).random()
                     char.geschF = (1..50).random()
                     char.geschN = (50..80).random()
                     char.maxLP = char.lp
@@ -25,7 +25,7 @@ class Dino() : Charakter() {
                 in 71..90 -> {
                     char.name = "Raptor"
                     char.lp = (120..200).random()
-                    char.atk = (75..150).random()
+                    char.atk = (85..120).random()
                     char.ver = (55..95).random()
                     char.geschF = (1..55).random()
                     char.geschN = (60..85).random()
@@ -40,7 +40,7 @@ class Dino() : Charakter() {
                     char.name = "Rex"
                     char.lp = (190..285).random()
                     char.atk = (120..200).random()
-                    char.ver = (100..120).random()
+                    char.ver = (80..100).random()
                     char.geschF = (1..55).random()
                     char.geschN = (60..85).random()
                     char.maxLP = char.lp
@@ -56,8 +56,8 @@ class Dino() : Charakter() {
                 in 0..60 -> {
                     char.name = "Compy"
                     char.lp = (75..150).random()
-                    char.atk = (50..90).random()
-                    char.ver = (20..750).random()
+                    char.atk = (70..90).random()
+                    char.ver = (20..75).random()
                     char.geschF = (1..50).random()
                     char.geschN = (50..80).random()
                     char.maxLP = char.lp
@@ -70,7 +70,7 @@ class Dino() : Charakter() {
                 in 61..85 -> {
                     char.name = "Raptor"
                     char.lp = (120..200).random()
-                    char.atk = (75..150).random()
+                    char.atk = (85..120).random()
                     char.ver = (55..95).random()
                     char.geschF = (1..55).random()
                     char.geschN = (60..85).random()
@@ -85,7 +85,7 @@ class Dino() : Charakter() {
                     char.name = "Rex"
                     char.lp = (190..285).random()
                     char.atk = (120..200).random()
-                    char.ver = (100..120).random()
+                    char.ver = (80..100).random()
                     char.geschF = (1..55).random()
                     char.geschN = (60..85).random()
                     char.maxLP = char.lp
@@ -101,8 +101,8 @@ class Dino() : Charakter() {
                 in 0..40 -> {
                     char.name = "Compy"
                     char.lp = (75..150).random()
-                    char.atk = (50..90).random()
-                    char.ver = (20..750).random()
+                    char.atk = (70..90).random()
+                    char.ver = (20..75).random()
                     char.geschF = (1..50).random()
                     char.geschN = (50..80).random()
                     char.maxLP = char.lp
@@ -115,7 +115,7 @@ class Dino() : Charakter() {
                 in 41..75 -> {
                     char.name = "Raptor"
                     char.lp = (120..200).random()
-                    char.atk = (75..150).random()
+                    char.atk = (85..120).random()
                     char.ver = (55..95).random()
                     char.geschF = (1..55).random()
                     char.geschN = (60..85).random()
@@ -130,7 +130,7 @@ class Dino() : Charakter() {
                     char.name = "Rex"
                     char.lp = (190..285).random()
                     char.atk = (120..200).random()
-                    char.ver = (100..120).random()
+                    char.ver = (80..100).random()
                     char.geschF = (1..55).random()
                     char.geschN = (60..85).random()
                     char.maxLP = char.lp
@@ -152,25 +152,101 @@ class Dino() : Charakter() {
             var i = (0..100).random()
             var schaden = 0
             when (i) {
-                in (0..50) -> {
+                in (0..80) -> {
                     schaden = attack()
                     var ziel = reihenfolgeListe.filterIsInstance<Held>().random()
                     ziel.takeDamage(schaden)
                     println()
                 }
 
-                in (51..85) -> {
-                    schaden = spezialAngriff()
-                    var ziel = reihenfolgeListe.filterIsInstance<Held>().random()
-                    ziel.takeDamage(schaden)
-                    println()
-                }
-
-                in (86..100) -> {
+                in (81..100) -> {
                     when (this.name) {
-                        "Compy" -> Faehigkeiten().dinoHeilen()
-                        "Raptor" -> Faehigkeiten().dinoAngrPlus()
-                        "Rex" -> Faehigkeiten().dinoRufen()
+                        "Compy" -> {
+                            println(
+                                "    println(\"                                                    -- __\\n\" +\n" +
+                                        "            \"                                                  ~ (@)  ~~~---_\\n\" +\n" +
+                                        "            \"                                                {     `-_~=======)\\n\" +\n" +
+                                        "            \"                                                {    (_  ',\\n\" +\n" +
+                                        "            \"                                                 ~    . = _',\\n\" +\n" +
+                                        "            \"                                                  ~    '.  =-'\\n\" +\n" +
+                                        "            \"                                                    ~     :\\n\" +\n" +
+                                        "            \".                                                -~     (\\\"\\\");\\n\" +\n" +
+                                        "            \" '.                                         --~        \\\\  \\\\ ;\\n\" +\n" +
+                                        "            \"   \\\".-_                                   -~            \\\\  \\\\;      _-====\\n\" +\n" +
+                                        "            \"      -~- _                          -~                 {  \\\"---- _'-====\\n\" +\n" +
+                                        "            \"        ~- _~-  _              _ -~                     ~---------==.=`\\n\" +\n" +
+                                        "            \"             ~-  ~~-----~~~~~~       .+++~~~~~~~~-__   /\\n\" +\n" +
+                                        "            \"                 ~-   __            {   -     +   }   /\\n\" +\n" +
+                                        "            \"                          ~- ______{_    _ -=\\\\ / /_ ~\\n\" +\n" +
+                                        "            \"                              :      ~--~    // /         ..-\\n\" +\n" +
+                                        "            \"                              :   / /      // /         ((\\n\" +\n" +
+                                        "            \"                              :  / /      {   `-------=. ))\\n\" +\n" +
+                                        "            \"                              :   /        '\\\"=--------. }o\\n\" +\n" +
+                                        "            \"                 .=._________,'  )                     ))\\n\" +\n" +
+                                        "            \"                 )  _________ -''                     ~~\\n\" +\n" +
+                                        "            \"                / /  _ _                   =\\n\" +\n" +
+                                        "            \"               (_.-.'O'-'.\")"
+                            )
+                            Thread.sleep(1000)
+                            Faehigkeiten().dinoHeilen()
+                        }
+
+                        "Raptor" -> {
+                            println(
+                                "                                                     ___._\n" +
+                                        "                                                   .'  <0>'-.._\n" +
+                                        "                                                  /  /.--.____\")\n" +
+                                        "                                                 |   \\   __.-'~\n" +
+                                        "                                                 |  :  -'/\n" +
+                                        "                                                /:.  :.-'\n" +
+                                        "__________                                     | : '. |\n" +
+                                        "'--.____  '--------.______       _.----.-----./      :/\n" +
+                                        "        '--.__            `'----/       '-.      __ :/\n" +
+                                        "              '-.___           :           \\   .'  )/\n" +
+                                        "                    '---._           _.-'   ] /  _/\n" +
+                                        "                         '-._      _/     _/ / _/\n" +
+                                        "                             \\_ .-'____.-'__< |  \\___\n" +
+                                        "                               <_______.\\    \\_\\_---.7\n" +
+                                        "                              |   /'=r_.-'     _\\\\ =/\n" +
+                                        "                          .--'   /            ._/'>\n" +
+                                        "                        .'   _.-'\n" +
+                                        "   snd                 / .--'\n" +
+                                        "                      /,/\n" +
+                                        "                      |/`)\n" +
+                                        "                      'c=,"
+                            )
+                            Thread.sleep(1000)
+                            Faehigkeiten().dinoAngrPlus()
+                        }
+
+                        "Rex" -> {
+                            println(
+                                "                                              ____\n" +
+                                        "  ___                                      .-~. /_\"-._\n" +
+                                        "`-._~-.                                  / /_ \"~o\\  :Y\n" +
+                                        "      \\  \\                                / : \\~x.  ` ')\n" +
+                                        "      ]  Y                              /  |  Y< ~-.__j\n" +
+                                        "     /   !                        _.--~T : l  l<  /.-~\n" +
+                                        "    /   /                 ____.--~ .   ` l /~\\ \\<|Y\n" +
+                                        "   /   /             .-~~\"        /| .    ',-~\\ \\L|\n" +
+                                        "  /   /             /     .^   \\ Y~Y \\.^>/l_   \"--'\n" +
+                                        " /   Y           .-\"(  .  l__  j_j l_/ /~_.-~    .\n" +
+                                        "Y    l          /    \\  )    ~~~.\" / `/\"~ / \\.__/l_\n" +
+                                        "|     \\     _.-\"      ~-{__     l  :  l._Z~-.___.--~\n" +
+                                        "|      ~---~           /   ~~\"---\\_  ' __[>\n" +
+                                        "l  .                _.^   ___     _>-y~\n" +
+                                        " \\  \\     .      .-~   .-~   ~>--\"  /\n" +
+                                        "  \\  ~---\"            /     ./  _.-'\n" +
+                                        "   \"-.,_____.,_  _.--~\\     _.-~\n" +
+                                        "               ~~     (   _}       -Row\n" +
+                                        "                      `. ~(\n" +
+                                        "                        )  \\\n" +
+                                        "                  /,`--'~\\--'~\\\n" +
+                                        "                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
+                            )
+                            Thread.sleep(1000)
+                            Faehigkeiten().dinoRufen()
+                        }
                     }
                     println()
                 }

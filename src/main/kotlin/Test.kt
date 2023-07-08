@@ -5,4 +5,5 @@ fun main() {
     var game = Game()
     game.spielStarten()
     game.kampf()
+
 }
