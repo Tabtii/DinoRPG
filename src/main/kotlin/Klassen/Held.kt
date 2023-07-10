@@ -4,7 +4,7 @@ open class Held() : Charakter() {
 
     fun heldenWahl(): Held {
         var char = Held()
-        println("Wer soll ihnen Helfen?")
+        println("Wer soll sie unterstützen?")
         println("--1-- Hunter // Sehr Geschickt im Umgang mit Fernkampfwaffen.")
         println("--2-- Ranger // Gut im Nah- und Fernkampf.")
         println("--3-- Mercenary // Furchtlos und stark im Nahkampf.")

@@ -141,6 +141,20 @@ class Dino() : Charakter() {
                 }
 
             }
+
+            4 -> {
+                char.name = "Giga"
+                char.lp = (300..450).random()
+                char.atk = (100..150).random()
+                char.ver = (80..95).random()
+                char.geschF = (1..50).random()
+                char.geschN = (70..1000).random()
+                char.maxLP = char.lp
+                char.maxAtk = char.atk
+                char.maxVer = char.ver
+                char.maxGeschF = char.geschF
+                char.maxGeschN = char.geschN
+            }
         }
         return char
     }
@@ -150,12 +164,17 @@ class Dino() : Charakter() {
 
         if (!kampfUnfaehig()) {
             var i = (0..100).random()
+            var random = (1..99).random()
             var schaden = 0
             when (i) {
                 in (0..80) -> {
                     schaden = attack()
-                    var ziel = reihenfolgeListe.filterIsInstance<Held>().random()
+                    var ziel = Held()
+
+                    ziel = reihenfolgeListe.filterIsInstance<Held>().random()
                     ziel.takeDamage(schaden)
+                    println()
+
                     println()
                 }
 
@@ -247,6 +266,12 @@ class Dino() : Charakter() {
                             Thread.sleep(1000)
                             Faehigkeiten().dinoRufen()
                         }
+
+                        else -> when (random) {
+                            in (1..33) -> Faehigkeiten().dinoAngrPlus()
+                            in (34..66) -> Faehigkeiten().dinoHeilen()
+                            in (67..99) -> Faehigkeiten().dinoRufen()
+                        }
                     }
                     println()
                 }
@@ -255,6 +280,8 @@ class Dino() : Charakter() {
         } else {
             reihenfolgeListe.remove(this)
         }
+
     }
 }
+
 

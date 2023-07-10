@@ -202,63 +202,65 @@ open class Charakter() {
             var spielfeld = Game()
             var ziel: Charakter
             var schaden = 0
-            when {
-                eingabe == "1" -> {
-                    ziel = spielfeld.gegnerWahl()
-                    schaden = attack()
-                    ziel.takeDamage(schaden)
-                    ziel.showLebenPunkte()
-                    Thread.sleep(1000)
-                }
+                when {
+                    eingabe == "1" -> {
+                        ziel = spielfeld.gegnerWahl()
+                        schaden = attack()
+                        ziel.takeDamage(schaden)
+                        ziel.showLebenPunkte()
+                        Thread.sleep(1000)
+                    }
 
-                eingabe == "2" -> {
-                    ziel = spielfeld.gegnerWahl()
-                    schaden = spezialAngriff()
-                    ziel.takeDamage(schaden)
-                    ziel.showLebenPunkte()
-                    Thread.sleep(1000)
-                }
+                    eingabe == "2" -> {
+                        ziel = spielfeld.gegnerWahl()
+                        schaden = spezialAngriff()
+                        ziel.takeDamage(schaden)
+                        ziel.showLebenPunkte()
+                        Thread.sleep(1000)
+                    }
 
-                eingabe == "3" -> {
-                    when {
-                        this.name == "Medic" -> Faehigkeiten().heilen()
-                        this.name == "Hunter" -> Faehigkeiten().angrPlus()
-                        this.name == "Mercenary" -> Faehigkeiten().vertPlus()
-                        this.name == "Ranger" -> Faehigkeiten().geschickPlus()
-                        else -> {
-                            when (hilfsWertSpezialAng) {
-                                in (0..3) -> multiAngriff()
-                                in (4..10) -> {
-                                    ziel = spielfeld.gegnerWahl()
-                                    schaden = healAngriff()
-                                    ziel.takeDamage(schaden)
-                                    ziel.showLebenPunkte()
-                                    Thread.sleep(1000)
+                    eingabe == "3" -> {
+                        when {
+                            this.name == "Medic" -> Faehigkeiten().heilen()
+                            this.name == "Hunter" -> Faehigkeiten().angrPlus()
+                            this.name == "Mercenary" -> Faehigkeiten().vertPlus()
+                            this.name == "Ranger" -> Faehigkeiten().geschickPlus()
+                            else -> {
+                                when (hilfsWertSpezialAng) {
+                                    in (0..3) -> multiAngriff()
+                                    in (4..10) -> {
+                                        ziel = spielfeld.gegnerWahl()
+                                        schaden = healAngriff()
+                                        ziel.takeDamage(schaden)
+                                        ziel.showLebenPunkte()
+                                        Thread.sleep(1000)
+                                    }
                                 }
                             }
                         }
                     }
+
+                    eingabe == "4" -> {
+                        inventar()
+                    }
+
+                    eingabe == "5" -> {
+                        exitProcess(0)
+                    }
+
+                    else -> {
+                        println("Falsche Eingabe!")
+                        aktion()
+                    }
                 }
 
-                eingabe == "4" -> {
-                    inventar()
-                }
-
-                eingabe == "5" -> {
-                    exitProcess(0)
-                }
-
-                else -> {
-                    println("Falsche Eingabe!")
-                    aktion()
-                }
-            }
             Thread.sleep(1000)
         } else {
             reihenfolgeListe.remove(this)
             when{
                 reihenfolgeListe.filterIsInstance<Dino>().isEmpty() -> {
                     gameLvl += 1
+                    runden = 0
                     println("Gewonnen!")
                 }
                 reihenfolgeListe.filterIsInstance<Held>().isEmpty() -> {

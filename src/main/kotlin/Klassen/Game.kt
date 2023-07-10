@@ -14,7 +14,7 @@ class Game {
     fun gegnerPlus() {
         when (gameLvl) {
             1 -> {
-                repeat(1) { charakterePLUS(Dino().randomDino()) }
+                 charakterePLUS(Dino().randomDino())
             }
 
             2 -> {
@@ -25,9 +25,8 @@ class Game {
                 repeat(3) { charakterePLUS(Dino().randomDino()) }
             }
 
-            4 -> {
-                println("GEWONNEN GUT GEMACHT!")
-                exitProcess(69)
+            4 -> {charakterePLUS(Dino().randomDino())
+
             }
         }
     }
@@ -54,14 +53,14 @@ class Game {
             "1" -> {
                 charakterePLUS(Held().heldErstellen())
                 charakterePLUS(Held().heldenWahl())
-                gameLvl = 1
+
             }
 
             "2" -> {
                 charakterePLUS(Held().heldErstellen())
                 charakterePLUS(Held().heldenWahl())
                 charakterePLUS(Held().heldenWahl())
-                gameLvl = 2
+
             }
 
             "3" -> {
@@ -69,7 +68,15 @@ class Game {
                 charakterePLUS(Held().heldenWahl())
                 charakterePLUS(Held().heldenWahl())
                 charakterePLUS(Held().heldenWahl())
-                gameLvl = 3
+
+            }
+
+            "4" -> {
+                println("Alleine!?")
+                println()
+                charakterePLUS(Held().heldErstellen())
+                println()
+                Thread.sleep(1000)
             }
         }
         gegnerPlus()
@@ -94,12 +101,19 @@ class Game {
         }
     }
 
-    fun siegOderLose(): Boolean {
+    fun sieg(): Boolean {
         when {
             reihenfolgeListe.filterIsInstance<Dino>().isEmpty() -> {
                 return false
             }
 
+
+        }
+        return true
+    }
+
+    fun lose ():Boolean {
+        when {
             reihenfolgeListe.filterIsInstance<Held>().isEmpty() -> {
                 return false
             }
@@ -183,25 +197,26 @@ class Game {
     fun kampf() {
         reihenfolge()
 
-        while (siegOderLose()) {
+        while (sieg() || lose()) {
+            if (!sieg() || !lose()) break
             for (char in reihenfolgeListe) {
                 char.showLebenPunkte()
                 Thread.sleep(1000)
             }
             var i = 0
-            while (siegOderLose()) {
-                ++i
+            while (sieg() || lose()) {
+                if (!sieg() || !lose()) break
                 if (i > reihenfolgeListe.lastIndex) {
                     i = 0
                     reihenfolge()
                 }
                 if (reihenfolgeListe[i].kampfUnfaehig()) {
                     reihenfolge()
-                    siegOderLose()
+                    sieg()
                     continue
                 }
                 reihenfolgeListe[i].kampfUnfaehig()
-                siegOderLose()
+                sieg()
                 if (reihenfolgeListe[i] is Held) {
                     reihenfolge()
                     reihenfolgeListe[i].showStats()
@@ -210,17 +225,22 @@ class Game {
                 reihenfolge()
                 reihenfolgeListe[i].kampfUnfaehig()
                 reihenfolge()
-                siegOderLose()
                 runde()
+                ++i
             }
             reihenfolge()
             gameLvl += 1
             println("Runden gespielt: $runden\n")
         }
-        println()
-        nextLvl()
-        println()
-        kampf()
+        if (!sieg()) {
+            println()
+            nextLvl()
+            println()
+            kampf()
+        }else {
+            println("Schade")
+            exitProcess(1)
+        }
     }
 
     fun reihenfolge() {
