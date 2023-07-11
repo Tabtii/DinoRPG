@@ -38,8 +38,8 @@ class Dino() : Charakter() {
 
                 in 91..100 -> {
                     char.name = "Rex"
-                    char.lp = (190..285).random()
-                    char.atk = (120..200).random()
+                    char.lp = (190..255).random()
+                    char.atk = (120..150).random()
                     char.ver = (80..100).random()
                     char.geschF = (1..55).random()
                     char.geschN = (60..85).random()
@@ -83,8 +83,8 @@ class Dino() : Charakter() {
 
                 in 86..100 -> {
                     char.name = "Rex"
-                    char.lp = (190..285).random()
-                    char.atk = (120..200).random()
+                    char.lp = (190..255).random()
+                    char.atk = (120..150).random()
                     char.ver = (80..100).random()
                     char.geschF = (1..55).random()
                     char.geschN = (60..85).random()
@@ -128,8 +128,8 @@ class Dino() : Charakter() {
 
                 in 76..100 -> {
                     char.name = "Rex"
-                    char.lp = (190..285).random()
-                    char.atk = (120..200).random()
+                    char.lp = (190..255).random()
+                    char.atk = (120..150).random()
                     char.ver = (80..100).random()
                     char.geschF = (1..55).random()
                     char.geschN = (60..85).random()
@@ -148,7 +148,7 @@ class Dino() : Charakter() {
                 char.atk = (100..150).random()
                 char.ver = (80..95).random()
                 char.geschF = (1..50).random()
-                char.geschN = (70..1000).random()
+                char.geschN = (70..100).random()
                 char.maxLP = char.lp
                 char.maxAtk = char.atk
                 char.maxVer = char.ver

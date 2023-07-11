@@ -14,7 +14,7 @@ class Game {
     fun gegnerPlus() {
         when (gameLvl) {
             1 -> {
-                 charakterePLUS(Dino().randomDino())
+                charakterePLUS(Dino().randomDino())
             }
 
             2 -> {
@@ -25,7 +25,8 @@ class Game {
                 repeat(3) { charakterePLUS(Dino().randomDino()) }
             }
 
-            4 -> {charakterePLUS(Dino().randomDino())
+            4 -> {
+                charakterePLUS(Dino().randomDino())
 
             }
         }
@@ -33,17 +34,7 @@ class Game {
 
     fun spielStarten() {
         println(
-            "\n" +
-                    "\n" +
-                    " __          ___ _ _ _                                        \n" +
-                    " \\ \\        / (_) | | |                                       \n" +
-                    "  \\ \\  /\\  / / _| | | | _____  _ __ ___  _ __ ___   ___ _ __  \n" +
-                    "   \\ \\/  \\/ / | | | | |/ / _ \\| '_ ` _ \\| '_ ` _ \\ / _ \\ '_ \\ \n" +
-                    "    \\  /\\  /  | | | |   < (_) | | | | | | | | | | |  __/ | | |\n" +
-                    "     \\/  \\/   |_|_|_|_|\\_\\___/|_| |_| |_|_| |_| |_|\\___|_| |_|\n" +
-                    "                                                              \n" +
-                    "                                                              \n" +
-                    "\n"
+            "\n" + "\n" + " __          ___ _ _ _                                        \n" + " \\ \\        / (_) | | |                                       \n" + "  \\ \\  /\\  / / _| | | | _____  _ __ ___  _ __ ___   ___ _ __  \n" + "   \\ \\/  \\/ / | | | | |/ / _ \\| '_ ` _ \\| '_ ` _ \\ / _ \\ '_ \\ \n" + "    \\  /\\  /  | | | |   < (_) | | | | | | | | | | |  __/ | | |\n" + "     \\/  \\/   |_|_|_|_|\\_\\___/|_| |_| |_|_| |_| |_|\\___|_| |_|\n" + "                                                              \n" + "                                                              \n" + "\n"
         )
         Thread.sleep(1000)
         println("Wie viele Söldner willst du anheuern?")
@@ -112,7 +103,7 @@ class Game {
         return true
     }
 
-    fun lose ():Boolean {
+    fun lose(): Boolean {
         when {
             reihenfolgeListe.filterIsInstance<Held>().isEmpty() -> {
                 return false
@@ -203,6 +194,7 @@ class Game {
                 char.showLebenPunkte()
                 Thread.sleep(1000)
             }
+
             var i = 0
             while (sieg() || lose()) {
                 if (!sieg() || !lose()) break
@@ -211,12 +203,15 @@ class Game {
                     reihenfolge()
                 }
                 if (reihenfolgeListe[i].kampfUnfaehig()) {
+
                     reihenfolge()
                     sieg()
                     continue
                 }
                 reihenfolgeListe[i].kampfUnfaehig()
                 sieg()
+                if (!sieg() || !lose()) break
+
                 if (reihenfolgeListe[i] is Held) {
                     reihenfolge()
                     reihenfolgeListe[i].showStats()
@@ -237,8 +232,8 @@ class Game {
             nextLvl()
             println()
             kampf()
-        }else {
-            println("Schade")
+        } else {
+            println("Schade! Vielleicht beim nächsten Mal.")
             exitProcess(1)
         }
     }

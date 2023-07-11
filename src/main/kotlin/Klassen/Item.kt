@@ -17,10 +17,10 @@ class Item(name: String, val wert: Int, val effekt: Int, val beschreibung: Strin
                     "Stück Fleisch",
                     50,
                     20,
-                    "Lenkt einen Gegner ab. Senkt Verteidigung deutlich, heilt aber das Ziel minimal."
+                    "Lenkt einen Gegner ab. Senkt Verteidigung, heilt das Ziel."
                 )
 
-                else -> Item("Granate", 200, 100, "Macht bumm")
+                else -> Item("Granate", 200, 200, "Macht bumm.")
             }
         }
     }
