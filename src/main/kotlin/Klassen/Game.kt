@@ -188,15 +188,13 @@ class Game {
     fun kampf() {
         reihenfolge()
 
-        while (sieg() || lose()) {
-            if (!sieg() || !lose()) break
-            for (char in reihenfolgeListe) {
-                char.showLebenPunkte()
-                Thread.sleep(1000)
-            }
 
             var i = 0
             while (sieg() || lose()) {
+                for (char in reihenfolgeListe) {
+                    char.showLebenPunkte()
+                    Thread.sleep(1000)
+                }
                 if (!sieg() || !lose()) break
                 if (i > reihenfolgeListe.lastIndex) {
                     i = 0
@@ -226,7 +224,7 @@ class Game {
             reihenfolge()
             gameLvl += 1
             println("Runden gespielt: $runden\n")
-        }
+
         if (!sieg()) {
             println()
             nextLvl()
