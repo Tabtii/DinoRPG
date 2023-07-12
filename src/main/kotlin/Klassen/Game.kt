@@ -74,6 +74,13 @@ class Game {
     }
 
     fun nextLvl() {
+        println("Achtung es kommen noch mehr!")
+        when (gameLvl){
+            2 -> { rucksack.add(Item.zufallItem())}
+            3 -> repeat(2){ rucksack.add(Item.zufallItem())}
+            4 -> repeat(3){ rucksack.add(Item.zufallItem())}
+        }
+        Thread.sleep(1000)
         heroListe.clear()
         dinoListe.clear()
         for (held in reihenfolgeListe.filterIsInstance<Held>()) {
@@ -187,47 +194,49 @@ class Game {
 
     fun kampf() {
         reihenfolge()
+        var i = 0
 
+        while (sieg() || lose()) {
+            if (!sieg() || !lose()) break
 
-            var i = 0
-            while (sieg() || lose()) {
-                for (char in reihenfolgeListe) {
-                    char.showLebenPunkte()
-                    Thread.sleep(1000)
-                }
-                if (!sieg() || !lose()) break
-                if (i > reihenfolgeListe.lastIndex) {
-                    i = 0
-                    reihenfolge()
-                }
-                if (reihenfolgeListe[i].kampfUnfaehig()) {
-
-                    reihenfolge()
-                    sieg()
-                    continue
-                }
-                reihenfolgeListe[i].kampfUnfaehig()
-                sieg()
-                if (!sieg() || !lose()) break
-
-                if (reihenfolgeListe[i] is Held) {
-                    reihenfolge()
-                    reihenfolgeListe[i].showStats()
-                }
-                reihenfolgeListe[i].aktion()
+            if (!sieg() || !lose()) break
+            if (i > reihenfolgeListe.lastIndex) {
+                i = 0
                 reihenfolge()
-                reihenfolgeListe[i].kampfUnfaehig()
-                reihenfolge()
-                runde()
-                ++i
             }
+            if (reihenfolgeListe[i].kampfUnfaehig()) {
+                reihenfolge()
+                sieg()
+                continue
+            }
+            reihenfolgeListe[i].kampfUnfaehig()
+            sieg()
+            if (!sieg() || !lose()) break
+
+            if (reihenfolgeListe[i] is Held) {
+                reihenfolge()
+                reihenfolgeListe[i].showStats()
+            }
+            reihenfolgeListe[i].aktion()
             reihenfolge()
-            gameLvl += 1
-            println("Runden gespielt: $runden\n")
+            reihenfolgeListe[i].kampfUnfaehig()
+            if (!sieg() || !lose()) break
+            reihenfolge()
+            runde()
+            ++i
+        }
+        reihenfolge()
+        gameLvl += 1
+        println("Runden gespielt: $runden\n")
 
         if (!sieg()) {
             println()
+            Thread.sleep(1000)
             nextLvl()
+            for (x in reihenfolgeListe){
+                x.showLebenPunkte()
+            }
+            Thread.sleep(1000)
             println()
             kampf()
         } else {

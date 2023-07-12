@@ -95,12 +95,13 @@ open class Charakter() {
         if (rucksack.isNotEmpty()) {
             for (item in rucksack) {
                 println("$i: ${item.name} // ${item.beschreibung}")
+                i++
             }
 
             println("Was willst du benutzen?")
             var eingaben = readln()
             if (eingaben.toInt() in 0..rucksack.lastIndex) {
-                when (rucksack[i].name) {
+                when (rucksack[eingaben.toInt()].name) {
                     "Medkit" -> {
                         println("Wer soll geheilt werden?")
                         var ziel = Game().heroWahl()
@@ -108,7 +109,7 @@ open class Charakter() {
                             println("${ziel.name} muss nicht geheilt werden.\n")
                             Thread.sleep(500)
                         } else {
-                            ziel.lp += rucksack[i].effekt
+                            ziel.lp += rucksack[eingaben.toInt()].effekt
                             println("${ziel.name} wurde geheilt.\n")
                             Thread.sleep(500)
                             if (ziel.lp > ziel.maxLP) {
@@ -117,33 +118,33 @@ open class Charakter() {
                             }
                         }
                         Thread.sleep(500)
-                        rucksack.removeAt(i)
+                        rucksack.removeAt(eingaben.toInt())
                     }
 
                     "Stein" -> {
                         println("Wen willst du abwerfen?")
-                        var schaden = rucksack[i].effekt
+                        var schaden = rucksack[eingaben.toInt()].effekt
                         var ziel = Game().gegnerWahl()
                         ziel.lp -= schaden
                         ziel.showLebenPunkte()
                         Thread.sleep(500)
                         ziel.atk -= 10
                         println("${ziel.name}s Angriff wurde verringert. Atk:${ziel.atk}/${ziel.maxAtk}.")
-                        rucksack.removeAt(i)
+                        rucksack.removeAt(eingaben.toInt())
                         Thread.sleep(500)
 
                     }
 
                     "Stück Fleisch" -> {
                         println("Wen willst du abwerfen?")
-                        var schaden = rucksack[i].effekt
+                        var schaden = rucksack[eingaben.toInt()].effekt
                         var ziel = Game().gegnerWahl()
                         ziel.lp += schaden
                         ziel.showLebenPunkte()
                         Thread.sleep(500)
                         ziel.ver -= schaden
                         println("${ziel.name}s Verteidigung wurde verringert. Atk:${ziel.ver}/${ziel.maxVer}.\n")
-                        rucksack.removeAt(i)
+                        rucksack.removeAt(eingaben.toInt())
                         Thread.sleep(500)
 
                     }
@@ -153,7 +154,7 @@ open class Charakter() {
                         for (x in reihenfolgeListe) {
                             when (x) {
                                 is Dino -> {
-                                    var schaden = rucksack[i].effekt
+                                    var schaden = rucksack[eingaben.toInt()].effekt
                                     var ziel = x
                                     ziel.takeDamage(schaden)
                                     ziel.showLebenPunkte()
@@ -161,7 +162,7 @@ open class Charakter() {
                                 }
                             }
                         }
-                        rucksack.removeAt(i)
+                        rucksack.removeAt(eingaben.toInt())
                         Thread.sleep(500)
 
                     }
