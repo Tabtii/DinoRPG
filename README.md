@@ -44,4 +44,6 @@ In der dritten Runde wird gegen 3 zufällige Dinos gekämpft.
 In der vierten und letzten Runde wird gegen den Boss ("GIGA") gekämpft.  
 Nach jedem kampf erhählt man zufällig ein neues Item.
 
+## Klassendiagramm
+
 ![image](https://github.com/Tabtii/DinoRPG/assets/134264145/5d24fc2a-a7e3-4bc3-a600-0728499f9010)
