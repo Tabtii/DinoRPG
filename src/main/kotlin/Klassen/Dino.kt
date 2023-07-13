@@ -174,15 +174,13 @@ class Dino() : Charakter() {
                     ziel = reihenfolgeListe.filterIsInstance<Held>().random()
                     ziel.takeDamage(schaden)
                     println()
-
-                    println()
                 }
 
                 in (81..100) -> {
                     when (this.name) {
                         "Compy" -> {
                             println(
-                                "    println(\"                                                    -- __\\n\" +\n" +
+                                        "            \"                                                    -- __\\n\" +\n" +
                                         "            \"                                                  ~ (@)  ~~~---_\\n\" +\n" +
                                         "            \"                                                {     `-_~=======)\\n\" +\n" +
                                         "            \"                                                {    (_  ',\\n\" +\n" +
@@ -240,7 +238,7 @@ class Dino() : Charakter() {
 
                         "Rex" -> {
                             println(
-                                "                                              ____\n" +
+                                        "                                              ____\n" +
                                         "  ___                                      .-~. /_\"-._\n" +
                                         "`-._~-.                                  / /_ \"~o\\  :Y\n" +
                                         "      \\  \\                                / : \\~x.  ` ')\n" +

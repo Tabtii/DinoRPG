@@ -18,6 +18,7 @@ open class Charakter() {
 
     fun attack(): Int {
         println("${this.name} greift an!\n")
+        Thread.sleep(1000)
         return 25 + ((atk + geschN) / 2).toInt()
     }
 
@@ -26,17 +27,21 @@ open class Charakter() {
         if (this.lp <= 0) {
             this.lp = 0
             println("${this.name} wurde besiegt.")
+            Thread.sleep(1000)
         }
         if (damagePoints <= 0) {
             println("Es wurde kein schaden verursacht.")
+            Thread.sleep(1000)
         } else {
             println("${this.name} wurde $damagePoints schaden zugefügt.")
+            Thread.sleep(1000)
             this.lp -= damagePoints
         }
     }
 
     open fun spezialAngriff(): Int {
         println("${this.name} greift an!\n")
+        Thread.sleep(1000)
         return 25 + ((atk + geschF) / 2).toInt()
     }
 

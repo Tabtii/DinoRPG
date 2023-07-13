@@ -74,7 +74,9 @@ class Game {
     }
 
     fun nextLvl() {
+        Thread.sleep(1000)
         println("Achtung es kommen noch mehr!")
+        Thread.sleep(1000)
         when (gameLvl){
             2 -> { rucksack.add(Item.zufallItem())}
             3 -> repeat(2){ rucksack.add(Item.zufallItem())}
@@ -195,7 +197,10 @@ class Game {
     fun kampf() {
         reihenfolge()
         var i = 0
-
+        for (x in reihenfolgeListe){
+            x.showLebenPunkte()
+        }
+        Thread.sleep(1500)
         while (sieg() || lose()) {
             if (!sieg() || !lose()) break
 
@@ -227,7 +232,9 @@ class Game {
         }
         reihenfolge()
         gameLvl += 1
+        Thread.sleep(1000)
         println("Runden gespielt: $runden\n")
+        Thread.sleep(1000)
 
         if (!sieg()) {
             println()
@@ -240,6 +247,7 @@ class Game {
             println()
             kampf()
         } else {
+            Thread.sleep(1000)
             println("Schade! Vielleicht beim nächsten Mal.")
             exitProcess(1)
         }
