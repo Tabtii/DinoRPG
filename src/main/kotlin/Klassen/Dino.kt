@@ -157,7 +157,8 @@ class Dino() : Charakter() {
             }
         }
         return char
-    }
+    } // Wählt zufällige Gegner aus mit zufälligen Werten.
+    // Die wahrscheinlichkeit welchen gegner man bekommt hängt vom gameLvl ab
 
 
     override fun aktion() {

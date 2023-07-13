@@ -85,7 +85,7 @@ open class Held() : Charakter() {
         }
         println()
         return char
-    }
+    }// erstellt die Helfer
 
     fun heldErstellen(): Held {
         println("Wie heißt du?")
@@ -104,6 +104,6 @@ open class Held() : Charakter() {
         char.showStats()
         Thread.sleep(1000)
         return char
-    }
+    } // erstellt den "Spielcharakter"
 
 }

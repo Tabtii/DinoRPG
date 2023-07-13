@@ -85,14 +85,14 @@ open class Charakter() {
         this.ver = maxVer
         this.geschF = maxGeschF
         this.geschN = maxGeschN
-    }
+    } // setzt die werte nach jedem gewonnen LVL zurück
 
     fun kampfUnfaehig(): Boolean {
         if (this.lp <= 0){
             reihenfolgeListe.remove(this)
         }
         return this.lp <= 0
-    }
+    } // Überprüft ob der Charakter noch teilnehmen kann
 
     fun inventar() {
         var i = 0
@@ -177,14 +177,14 @@ open class Charakter() {
         } else {
             println("Kein Item vorhanden.")
         }
-    }
+    } // auflistung der verfügbaren Items
 
     open fun showLebenPunkte() {
         if (this.lp <= 0){
             println("${this.name} hat noch (0/${this.maxLP}) LP.\n")
         }else {println("${this.name} hat noch (${this.lp}/${this.maxLP}) LP.\n")}
 
-    }
+    } // zeigt nur Name und Lebenspunkte an
 
     fun showStats() {
         println("Name:${this.name}")
@@ -194,7 +194,7 @@ open class Charakter() {
         println("Geschick Nahkampf :${this.geschN}/${this.maxGeschN}")
         println("Geschick Fernkampf:${this.geschF}/${this.maxGeschF}")
         println()
-    }
+    }// zeigt alle Werte an
 
     open fun aktion() {
         if (!kampfUnfaehig()) {

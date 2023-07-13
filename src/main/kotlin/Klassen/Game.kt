@@ -30,7 +30,7 @@ class Game {
 
             }
         }
-    }
+    }//erzeugt entsprechend des gameLvl die Gegner
 
     fun spielStarten() {
         println(
@@ -71,7 +71,7 @@ class Game {
             }
         }
         gegnerPlus()
-    }
+    }// Hier wird der "Spielcharakter" erstellt und die Helfer erzeugt und der erste gegner
 
     fun nextLvl() {
         Thread.sleep(1000)
@@ -92,14 +92,15 @@ class Game {
         reihenfolgeListe.clear()
         gegnerPlus()
         reihenfolge()
-    }
+    } //Startet das nächste Level / Kampf und fügt entsprechend zufällige Items dem Inventar hinzu
 
     fun charakterePLUS(charakter: Charakter) {
         when (charakter) {
             is Held -> heroListe.add(charakter)
             else -> dinoListe.add(charakter)
         }
-    }
+    } // fügt alle Charaktere einer temporären Liste hinzu,
+    // um später besser die Reihenfolge zu bestimmen
 
     fun sieg(): Boolean {
         when {
@@ -110,7 +111,7 @@ class Game {
 
         }
         return true
-    }
+    }//Überprüft ob alle Dinos kampfunfähig sind
 
     fun lose(): Boolean {
         when {
@@ -119,12 +120,12 @@ class Game {
             }
         }
         return true
-    }
+    } //Überprüft ob alle Helden kampfunfähig sind
 
     fun runde(): Int {
         runden += 1
         return runden
-    }
+    } // Zählt nur die anzahl gespielter Runden
 
     fun gegnerWahl(): Charakter {
         var i = 1
@@ -158,7 +159,7 @@ class Game {
             }
         }
         return reihenfolgeListe.filterIsInstance<Dino>()[help]
-    }
+    }// Zeigt eine Auflistung verfügbarer Gegner an und gibt den ausgewählten zurück
 
     fun heroWahl(): Charakter {
         var i = 1
@@ -192,7 +193,7 @@ class Game {
             }
         }
         return reihenfolgeListe.filterIsInstance<Held>()[help]
-    }
+    } // Zeigt eine Auflistung verfügbarer Helden an und gibt den ausgewählten zurück
 
     fun kampf() {
         reihenfolge()
@@ -251,7 +252,7 @@ class Game {
             println("Schade! Vielleicht beim nächsten Mal.")
             exitProcess(1)
         }
-    }
+    } // abwechselnde Kampf aktionen bis entweder Helden oder Dinos kampfunfähig sind
 
     fun reihenfolge() {
         var i = 0
@@ -290,5 +291,5 @@ class Game {
                 }
             }
         } while (true)
-    }
+    }// Sotiert die Helden und Gegner abwechselnd in eine Liste ein
 }
